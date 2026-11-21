@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { Dialog } from '@base-ui/react/dialog';
 import { Drawer } from '@base-ui/react/drawer';
-import { platform } from '@base-ui/utils/platform';
+import { SearchShortcut } from './SearchShortcut';
 import { useTimeout } from '@base-ui/utils/useTimeout';
 import { MagnifyingGlassIcon } from 'docs/src/icons/MagnifyingGlassIcon';
 import { loadSearchSitemap } from './Search/searchSitemap';
@@ -48,12 +48,6 @@ export function SearchControls({
   const [openTarget, setOpenTarget] = React.useState<OpenTarget | null>(null);
   const preloadTimeout = useTimeout();
   const pathname = usePathname();
-
-  const isCmd = React.useSyncExternalStore(
-    () => () => {},
-    () => platform.os.mac,
-    () => true,
-  );
 
   const closeMobileNav = React.useCallback(() => {
     scrollTopAfterMobileCloseRef.current = false;
@@ -189,10 +183,7 @@ export function SearchControls({
         onClick={handleDesktopTriggerClick}
       >
         Search
-        <span className="SearchTriggerShortcut">
-          ({isCmd ? <kbd>⌘</kbd> : <kbd>Ctrl+</kbd>}
-          <kbd>k</kbd>)
-        </span>
+        <SearchShortcut />
       </Dialog.Trigger>
       <React.Suspense fallback={null}>
         <SearchDialog
