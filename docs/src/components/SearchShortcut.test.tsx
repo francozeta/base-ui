@@ -30,7 +30,7 @@ it('does not assume a platform in the server-rendered search shortcut', () => {
 it.each([
   { os: 'Windows', mac: false, shortcut: '(Ctrl+k)' },
   { os: 'macOS', mac: true, shortcut: '(⌘k)' },
-])('shows $shortcut after hydration on $os', async ({ mac, shortcut }) => {
+])('shows $shortcut in the browser on $os', async ({ mac, shortcut }) => {
   testPlatform.mac = mac;
   const { container } = await render(<SearchShortcut />);
   const label = container.querySelector('.SearchTriggerShortcutLabel');
