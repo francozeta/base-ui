@@ -47,6 +47,19 @@
   }
 
   .SearchTriggerShortcut {
+    display: inline-grid;
     color: var(--gray-t1);
+
+    /* Reserve the widest shortcut before the client knows the platform. */
+    &::before {
+      content: '(Ctrl+k)';
+      grid-area: 1 / 1;
+      visibility: hidden;
+    }
+  }
+
+  .SearchTriggerShortcutLabel {
+    grid-area: 1 / 1;
+    text-align: right;
   }
 }
